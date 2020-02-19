@@ -216,7 +216,8 @@ declare namespace Client { // tslint:disable-line:no-namespace
 		public sendUpgradeProposal(request: ChaincodeInstantiateUpgradeRequest, timeout?: number): Promise<ProposalResponseObject>;
 		public sendTransactionProposal(request: ChaincodeInvokeRequest, timeout?: number): Promise<ProposalResponseObject>;
 		public sendTransaction(request: TransactionRequest, timeout?: number): Promise<BroadcastResponse>;
-
+		public sendUnorderedTransaction(request: TransactionRequest, timeout?: number):Promise<BlockRecipe>;
+		
 		public generateUnsignedProposal(request: ProposalRequest, mspId: string, certificate: string, admin: boolean): Promise<Proposal>;
 		public sendSignedProposal(request: SignedProposal, timeout?: number): Promise<ProposalResponseObject>;
 		public generateUnsignedTransaction(request: TransactionRequest): Promise<any>;
@@ -288,6 +289,12 @@ declare namespace Client { // tslint:disable-line:no-namespace
 	export interface BroadcastResponse {
 		status: string;
 		info?: string;
+	}
+
+	export interface BlockRecipe {
+		id: any;
+		header: any;
+		response: any;
 	}
 
 	export type ProposalResponseObject = [Array<Client.ProposalResponse | Error>, Client.Proposal];
